@@ -11,6 +11,16 @@
 *.fdb_latexmk
 *.synctex.gz
 *.pdf
+*.bcf
+*.idx
+*.ilg
+*.ind
+*.run.xml
+# Editor backups and temp files
+*~
+*.txss2
+*.glo
+*.odt
 
 # OS junk
 .DS_Store
