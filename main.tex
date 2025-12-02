@@ -1,0 +1,132 @@
+\documentclass[14pt]{extarticle}
+
+% --- PREAMBLE ---
+\usepackage{calc}
+\usepackage{float}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Bonum}
+\usepackage[english]{babel}
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\usepackage{array,hhline}
+\usepackage{graphicx}
+\usepackage[firstpage=true]{background}
+\usepackage{csquotes}
+\usepackage{verbatim}
+\usepackage[toc]{glossaries}
+\usepackage{imakeidx}
+\usepackage{fancyhdr}
+\usepackage[expansion=false]{microtype}
+\usepackage{xltabular} % The best table package
+\usepackage{ragged2e}  % For better text alignment
+\usepackage{url}       % Handy for links if needed
+\usepackage[colorlinks=false]{hyperref}
+\hypersetup{
+	linkbordercolor=white, % no box
+	pdfborderstyle={/S/U/W 1} % underline style
+}
+
+\makeindex
+\makeglossaries
+\loadglsentries{glossary-defs.tex}
+
+% --- CONFIGURATION ---
+\addbibresource{refs.bib}
+\graphicspath{{images/}}
+\setlength\tabcolsep{1mm}
+\setlength{\parskip}{1em}
+\setlength{\headheight}{17.0pt}
+\renewcommand\arraystretch{1.3}
+
+% Window/Orphan Control
+\widowpenalty=10000
+\clubpenalty=10000
+
+% Header Setup
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textsc{Liber Defensionis}}
+\fancyhead[R]{\leftmark}
+\fancyfoot[C]{\thepage}
+
+% Background Image Setup
+\backgroundsetup{
+	scale=0.9,
+	opacity=0.05,
+	contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{solomon_pentagram.png}}
+}
+
+% --- METADATA ---
+\title{Liber Defensionis}
+\author{Michael Stilson}
+\date{\today}
+
+% --- THE DOCUMENT ---
+\begin{document}
+    % FRONT MATTER
+    \pagenumbering{roman}
+    
+    % Frontispiece (Optional, if you want it back)
+    % \thispagestyle{empty}
+    % \vspace*{\fill}
+    % \begin{center}
+    %    \includegraphics[width=0.8\textwidth,keepaspectratio]{solomon_circle_and_triangle.png}
+    % \end{center}
+    % \vspace*{\fill}
+    % \clearpage
+
+	\maketitle
+	\thispagestyle{empty}
+	\vspace{1.0in}
+	\begin{center}
+		{\large
+			A Practical Grimoire of Protection, Entrapment, and Expulsion \\
+			\bigskip
+			Derived from the Ars Goetia, Babylonian Tradition,
+			and Roman Catholic Ritual
+		}
+	\end{center}
+    \clearpage
+    \tableofcontents
+    \listoffigures
+    \listoftables
+    \clearpage
+
+    % MAIN CONTENT (The Fragments)
+    \pagenumbering{arabic}
+    
+    % Use \include for chapters (creates a page break automatically)
+    \include{chapters/01-introduction}
+    \include{chapters/02-repulsion}
+    \include{chapters/03-entrapment}
+    \include{chapters/04-expulsion}
+    \include{chapters/05-marduk}
+    \include{chapters/06-catholic}
+
+    \appendix
+    \setcounter{table}{0}
+    \setcounter{figure}{0}
+    \setcounter{page}{1}
+    \renewcommand{\thetable}{A.\arabic{table}} 
+    \renewcommand{\thefigure}{A.\arabic{figure}}
+    \renewcommand{\thepage}{A.\arabic{page}}
+
+    \include{chapters/app-01-pronunciation}
+    \include{chapters/app-02-materials}
+    \include{chapters/app-03-procedure}
+    \include{chapters/app-04-images}
+
+	% Closing page
+	\include{chapters/finis.tex}
+    % BACK MATTER
+    % \nocite{*} 
+    \printbibliography[keyword=babylonian,title={Sources for Babylonian Rituals}]
+    \printbibliography[keyword=catholic,title={Sources for Catholic Liturgical Texts}]
+    \printbibliography[keyword=occult,title={Sources for Occult Literature}]
+    
+    \printglossaries
+    \printindex
+
+\end{document}
