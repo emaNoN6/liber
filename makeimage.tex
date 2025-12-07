@@ -1,0 +1,93 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{decorations.text,calc,positioning}
+\usepackage{fontspec}
+
+% Ensure you have this font installed, or switch to a standard one like "Arial" if testing.
+\setmainfont{David CLM} 
+
+% --- Styles ---
+\tikzset{
+	circleA/.style={line width=1.4pt},
+	circleB/.style={line width=1pt},
+	star/.style={line width=0.9pt},
+	label/.style={font=\small}
+}
+
+% --- Arc text helper ---
+\newcommand{\arcinscription}[4]{%
+	\path[
+	decorate,
+	decoration={
+		text along path,
+		text align=center,
+		raise=0.6ex,
+		text={#4}
+	}
+	] ($(0,0)+(#2:#1)$) arc[start angle=#2, end angle=#3, radius=#1];
+}
+
+% --- Pentagram ---
+\newcommand{\pentagram}[2]{%
+	\path (#1) coordinate (P);
+	\path
+	($(P)+(90:#2)$)   coordinate (p1)
+	($(P)+(162:#2)$)  coordinate (p2)
+	($(P)+(234:#2)$)  coordinate (p3)
+	($(P)+(306:#2)$)  coordinate (p4)
+	($(P)+(18:#2)$)   coordinate (p5);
+	\draw[star] (p1)--(p3)--(p5)--(p2)--(p4)--cycle;
+}
+
+% --- Hexagram ---
+\newcommand{\hexagram}[2]{%
+	\path (#1) coordinate (H);
+	\draw[star] ($(H)+(90:#2)$)--($(H)+(210:#2)$)--($(H)+(330:#2)$)--cycle;
+	\draw[star] ($(H)+(270:#2)$)--($(H)+(30:#2)$)--($(H)+(150:#2)$)--cycle;
+}
+
+\begin{document}
+	\begin{tikzpicture}[scale=1, every node/.style={label}]
+		\coordinate (C) at (0,0);
+		
+		% --- Concentric circles ---
+		\draw[circleA] (C) circle (6cm); % outer
+		\draw[circleB] (C) circle (5cm); % inner text band
+		\draw[circleB] (C) circle (3cm); % core
+		
+		% --- Outer inscriptions ---
+		\arcinscription{6cm}{   0}{  90}{יהוה + אדני + אל}
+		\arcinscription{6cm}{  90}{ 180}{אלוהים + אהיה + שדי}
+		\arcinscription{6cm}{ 180}{ 270}{אגלא + צבאות + עימנואל}
+		\arcinscription{6cm}{ 270}{ 360}{מיכאל + גבריאל + רפאל + אוריאל}
+		
+		% --- Inner inscriptions ---
+		\arcinscription{5cm}{   0}{ 120}{ברוך שם כבוד מלכותו}
+		\arcinscription{5cm}{ 120}{ 240}{לעולם ועד}
+		\arcinscription{5cm}{ 240}{ 360}{סיגילום ארטיס} 
+		
+		% --- Cardinal pentagrams ---
+		\pentagram{$(C)+(  0:5cm)$}{0.8cm}
+		\pentagram{$(C)+( 90:5cm)$}{0.8cm}
+		\pentagram{$(C)+(180:5cm)$}{0.8cm}
+		\pentagram{$(C)+(270:5cm)$}{0.8cm}
+		
+		% --- Cardinal labels ---
+		\node at ($(C)+( 90:5.5cm)$) {מזרח}; % East
+		\node at ($(C)+(270:5.5cm)$) {מערב}; % West
+		\node at ($(C)+(  0:5.5cm)$) {דרום}; % South
+		\node at ($(C)+(180:5.5cm)$) {צפון}; % North
+		
+		% --- Central hexagram and name ---
+		% FIXED: Removed parentheses around C. Use \hexagram{C} not \hexagram{(C)}
+		\hexagram{C}{1.2cm} 
+		\node at (C) {יהוה};
+		
+		% --- Triangle of Art ---
+		\coordinate (T1) at (8,-2);
+		\coordinate (T2) at (12,-2);
+		\coordinate (T3) at (10,-6);
+		\draw[circleB] (T1)--(T2)--(T3)--cycle;
+		\node at (10,-3.6) {יהוה};
+	\end{tikzpicture}
+\end{document}
