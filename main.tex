@@ -1,5 +1,18 @@
 \documentclass[14pt]{extarticle}
 
+% Quick compile - uncomment ONE line to work on that chapter only
+%\includeonly{chapters/01-introduction}
+%\includeonly{chapters/02-repulsion}
+%\includeonly{chapters/03-entrapment}
+%\includeonly{chapters/04-expulsion}
+%\includeonly{chapters/05-marduk}
+\includeonly{chapters/06-catholic, chapters/app-04-images}
+%\includeonly{chapters/app-01-pronunciation}
+%\includeonly{chapters/app-02-materials}
+%\includeonly{chapters/app-03-procedure}
+%\includeonly{chapters/app-04-images}
+%\includeonly{chapters/finis}
+
 % --- PREAMBLE ---
 \usepackage{calc}
 \usepackage{float}
@@ -7,14 +20,28 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{fontspec}
-\setmainfont{TeX Gyre Bonum}
+\setmainfont{texgyrepagella}[
+	Path=./resources/,
+	Extension=.otf,
+	% Map the LaTeX commands to the specific files:
+	UprightFont = *-regular,
+	BoldFont = *-bold,
+	ItalicFont = *-italic,
+	BoldItalicFont = *-bolditalic,
+	% Optional: Scale it if it's too huge compared to your other fonts
+	Scale = 0.9
+]
 \usepackage[english]{babel}
-\usepackage[backend=biber,style=authoryear]{biblatex}
+% style=numeric: Gives you [1], [2] instead of (Author, Year)
+% sorting=none: Number references in the order they appear in the book (1, 2, 3...)
+% url=true: Ensures the URLs show up in the bibliography for your research
+\usepackage[backend=biber, style=numeric, sorting=none, url=true]{biblatex}
 \usepackage{array,hhline}
 \usepackage{graphicx}
 \usepackage[firstpage=true]{background}
 \usepackage{csquotes}
 \usepackage{verbatim}
+\usepackage{pifont}
 \usepackage[toc]{glossaries}
 \usepackage{imakeidx}
 \usepackage{fancyhdr}
@@ -28,6 +55,32 @@
 	pdfborderstyle={/S/U/W 1} % underline style
 }
 
+\usepackage{xcolor} % For the red rubrics
+\usepackage[justification=centering]{caption}
+
+% 1. THE RUBRICS (Red and Italic)
+\newcommand{\rubric}[1]{%
+	\par\noindent%
+	{\color{red!80!black}\itshape #1}%
+	\par\vspace{0.5em}%
+}
+
+% 2. THE V/R MACROS (Using the real Garamond symbols!)
+% We use \hangindent so multi-line responses align nicely.
+\newcommand{\V}{\par\noindent\hangindent=2em\makebox[1.5em][l]{\color{red!80!black}\textbf{℣.}}}
+\newcommand{\R}{\par\noindent\hangindent=2em\makebox[1.5em][l]{\color{red!80!black}\textbf{℟.}}}
+% 1. The "Action" Cross (Rubric)
+% Used when the text instructs the reader to make the sign of the cross.
+% This is your heavy Maltese cross.
+\newcommand{\rubriccross}{\textcolor{red!80!black}{\ding{64}}}
+
+% 2. The "Artifact" Cross (Medal Inscription)
+% Used to depict the physical inscription on the medal.
+% A simple bold '+' or a geometric cross is historically accurate to the coin.
+\newcommand{\medalcross}{\textcolor{red!80!black}{\textbf{+}}}
+% 3. THE CROSS (For blessings)
+\newcommand{\cross}{\textcolor{red!80!black}{$\dagger$}}
+
 \makeindex
 \makeglossaries
 \loadglsentries{glossary-defs.tex}
@@ -36,9 +89,12 @@
 \addbibresource{refs.bib}
 \graphicspath{{images/}}
 \setlength\tabcolsep{1mm}
-\setlength{\parskip}{1em}
+\setlength{\parskip}{1.5ex}
 \setlength{\headheight}{17.0pt}
 \renewcommand\arraystretch{1.3}
+% Define a new column type Y = flush left with hyphenation
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
 
 % Window/Orphan Control
 \widowpenalty=10000
@@ -56,6 +112,34 @@
 	scale=0.9,
 	opacity=0.05,
 	contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{solomon_pentagram.png}}
+}
+
+% Custom Fonts
+% Sanskrit (for the Buddhist chant)
+\newfontfamily\sanskritfont{TiroDevanagariSanskrit-Regular.ttf}[
+	Path = ./resources/,      % <--- Point to your folder here
+	Script = Devanagari,
+	AutoFakeBold = 1.5,
+	Renderer = HarfBuzz,
+	Scale=1.1
+]
+
+% Latin text font
+\newfontfamily\latinfont{EBGaramond-VariableFont_wght.ttf}[
+	Path = ./resources/,
+	UprightFeatures = {Weight=400}, 
+	BoldFeatures = {Weight=700},
+		% "Common" = standard stuff (fi, fl)
+		% "Rare" / "Discretionary" = The cool loops (st, ct) that make it look Latin
+	Ligatures={Common, Rare, Historic},
+	Scale=1.1
+]
+
+% Custom command for section subtitles
+\newcommand{\sectionsubtitle}[1]{%
+	\begin{center}
+		{\large{#1}}
+	\end{center}
 }
 
 % --- METADATA ---

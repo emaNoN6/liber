@@ -16,6 +16,10 @@
 *.ilg
 *.ind
 *.run.xml
+*.glg
+*.glo
+*.ist
+*.gls
 # Editor backups and temp files
 *~
 *.txss2
