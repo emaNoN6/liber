@@ -6,7 +6,8 @@
 %\includeonly{chapters/03-entrapment}
 %\includeonly{chapters/04-expulsion}
 %\includeonly{chapters/05-marduk}
-\includeonly{chapters/06-catholic, chapters/app-04-images}
+\includeonly{chapters/06-catholic,chapters/07-hebrew,chapters/app-04-images}
+%\includeonly{chapters/06-catholic, chapters/app-04-images}
 %\includeonly{chapters/app-01-pronunciation}
 %\includeonly{chapters/app-02-materials}
 %\includeonly{chapters/app-03-procedure}
@@ -57,6 +58,30 @@
 
 \usepackage{xcolor} % For the red rubrics
 \usepackage[justification=centering]{caption}
+
+% --- COMMAND 1: THE INLINE ARTIFACT ---
+% Usage: \inlineimage{filename}{Caption Text}{label_name}{citation_key}
+\newcommand{\inlineimage}[4]{
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.35\textwidth, keepaspectratio]{#1}
+		\caption{#2 \cite{#4}}
+		\label{fig:#3}
+	\end{figure}
+}
+
+% --- COMMAND 2: THE APPENDIX PLATE ---
+% Usage: \fullsizeimage[FLOAT_POS]{filename}{Title}{Credits}{citation_key}
+% [FLOAT_POS] is optional. Defaults to [p] (Page) if you leave it out.
+\newcommand{\fullsizeimage}[5][p]{
+	\begin{figure}[#1] 
+		\centering
+		\includegraphics[width=\textwidth, height=\dimexpr\textheight-3.5em\relax, keepaspectratio]{#2}
+		\captionsetup{justification=centering}
+		\caption[#3]{#3 \\ \textit{#4}}
+		\nocite{#5}
+	\end{figure}
+}
 
 % 1. THE RUBRICS (Red and Italic)
 \newcommand{\rubric}[1]{%
@@ -187,6 +212,7 @@
     \include{chapters/03-entrapment}
     \include{chapters/04-expulsion}
     \include{chapters/05-marduk}
+    \include{chapters/07-hebrew}
     \include{chapters/06-catholic}
 
     \appendix
@@ -206,11 +232,11 @@
 	\include{chapters/finis.tex}
     % BACK MATTER
     % \nocite{*} 
-    \printbibliography[keyword=babylonian,title={Sources for Babylonian Rituals}]
-    \printbibliography[keyword=catholic,title={Sources for Catholic Liturgical Texts}]
-    \printbibliography[keyword=occult,title={Sources for Occult Literature}]
-    
+	% Prints everything in one big alphabetical list
+	\printbibliography[heading=bibintoc, title={Bibliography}]    
+    \clearpage
     \printglossaries
+    \clearpage
     \printindex
 
 \end{document}
