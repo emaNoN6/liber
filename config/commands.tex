@@ -1,0 +1,64 @@
+% --- COMMAND 1: THE INLINE ARTIFACT ---
+% Usage: \inlineimage{filename}{Caption Text}{label_name}{citation_key}
+\newcommand{\inlineimage}[4]{
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.35\textwidth, keepaspectratio]{#1}
+		\caption{#2 \cite{#4}}
+		\label{fig:#3}
+	\end{figure}
+}
+
+% --- COMMAND 2: THE APPENDIX PLATE ---
+% Usage: \fullsizeimage[FLOAT_POS]{filename}{Title}{Credits}{citation_key}
+% [FLOAT_POS] is optional. Defaults to [p] (Page) if you leave it out.
+\newcommand{\fullsizeimage}[5][p]{
+	\begin{figure}[#1] 
+		\centering
+		\includegraphics[width=\textwidth, height=\dimexpr\textheight-3.5em\relax, keepaspectratio]{#2}
+		\captionsetup{justification=centering}
+		\caption[#3]{#3 \\ \textit{#4}}
+		\nocite{#5}
+	\end{figure}
+}
+
+% 1. THE RUBRICS (Red and Italic)
+\newcommand{\rubric}[1]{%
+	\par\noindent%
+	{\color{red!80!black}\itshape #1}%
+	\par\vspace{0.5em}%
+}
+
+% 2. THE V/R MACROS (Using the real Garamond symbols!)
+% We use \hangindent so multi-line responses align nicely.
+\newcommand{\V}{\par\noindent\hangindent=2em\makebox[1.5em][l]{\color{red!80!black}\textbf{℣.}}}
+\newcommand{\R}{\par\noindent\hangindent=2em\makebox[1.5em][l]{\color{red!80!black}\textbf{℟.}}}
+% 1. The "Action" Cross (Rubric)
+% Used when the text instructs the reader to make the sign of the cross.
+% This is your heavy Maltese cross.
+\newcommand{\rubriccross}{\textcolor{red!80!black}{\ding{64}}}
+
+% 2. The "Artifact" Cross (Medal Inscription)
+% Used to depict the physical inscription on the medal.
+% A simple bold '+' or a geometric cross is historically accurate to the coin.
+\newcommand{\medalcross}{\textcolor{red!80!black}{\textbf{+}}}
+% 3. THE CROSS (For blessings)
+\newcommand{\cross}{\textcolor{red!80!black}{$\dagger$}}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
+% Custom command for section subtitles
+\newcommand{\sectionsubtitle}[1]{%
+	\begin{center}
+		{\large{#1}}
+	\end{center}
+}
+
+\newcommand{\flourish}{%
+	\par
+	\addvspace{1.5em}
+	\noindent\centering
+	% Line -- Symbol -- Line
+	\rule[0.5ex]{0.15\textwidth}{0.4pt} \quad \rubriccross \quad \rule[0.5ex]{0.15\textwidth}{0.4pt}
+	\par
+	\addvspace{1.5em}
+}

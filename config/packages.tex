@@ -1,0 +1,43 @@
+\usepackage{calc}
+\usepackage{float}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{fontspec}
+\setmainfont{texgyrepagella}[
+Path=./resources/,
+Extension=.otf,
+% Map the LaTeX commands to the specific files:
+UprightFont = *-regular,
+BoldFont = *-bold,
+ItalicFont = *-italic,
+BoldItalicFont = *-bolditalic,
+% Optional: Scale it if it's too huge compared to your other fonts
+Scale = 0.9
+]
+\usepackage[english]{babel}
+% style=numeric: Gives you [1], [2] instead of (Author, Year)
+% sorting=none: Number references in the order they appear in the book (1, 2, 3...)
+% url=true: Ensures the URLs show up in the bibliography for your research
+\usepackage[backend=biber, style=numeric, sorting=none, url=true, dateera=secular, datecirca=true]{biblatex}
+\usepackage{array,hhline}
+\usepackage{graphicx}
+\usepackage[firstpage=true]{background}
+\usepackage{csquotes}
+\usepackage{verbatim}
+\usepackage{pifont}
+\usepackage[toc]{glossaries}
+\usepackage{imakeidx}
+\usepackage{fancyhdr}
+\usepackage[expansion=false]{microtype}
+\usepackage{xltabular} % The best table package
+\usepackage{ragged2e}  % For better text alignment
+\usepackage{url}       % Handy for links if needed
+\usepackage[colorlinks=false]{hyperref}
+\hypersetup{
+	linkbordercolor=white, % no box
+	pdfborderstyle={/S/U/W 1} % underline style
+}
+
+\usepackage{xcolor} % For the red rubrics
+\usepackage[justification=centering]{caption}

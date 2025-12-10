@@ -1,0 +1,20 @@
+% Custom Fonts
+% Sanskrit (for the Buddhist chant)
+\newfontfamily\sanskritfont{TiroDevanagariSanskrit-Regular.ttf}[
+Path = ./resources/,      % <--- Point to your folder here
+Script = Devanagari,
+AutoFakeBold = 1.5,
+Renderer = HarfBuzz,
+Scale=1.1
+]
+
+% Latin text font
+\newfontfamily\latinfont{EBGaramond-VariableFont_wght.ttf}[
+Path = ./resources/,
+UprightFeatures = {Weight=400}, 
+BoldFeatures = {Weight=700},
+% "Common" = standard stuff (fi, fl)
+% "Rare" / "Discretionary" = The cool loops (st, ct) that make it look Latin
+Ligatures={Common, Rare, Historic},
+Scale=1.1
+]
